@@ -1,2 +1,2 @@
-def sum_two(a, b):
+def plus(a, b):
     return a + b

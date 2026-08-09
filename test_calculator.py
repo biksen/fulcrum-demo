@@ -1,4 +1,4 @@
-from calculator import sum_two
+from calculator import plus
 
-def test_sum_two():
-    assert sum_two(2, 3) == 5
+def test_plus():
+    assert plus(2, 3) == 5
