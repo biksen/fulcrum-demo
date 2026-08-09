@@ -1,8 +1,16 @@
 name: tests
-on: [push, pull_request]
+# Push only — dropping `pull_request` removes the redundant PR run, since the
+# fix branch's push already produced the passing check the PR displays.
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    # Skip only the push that CREATES one of Fulcrum's fix branches: Fulcrum
+    # branches at the still-broken commit before pushing the fix, so that
+    # branch-creation run is a guaranteed-red duplicate. The fix push right after
+    # it (github.event.created == false) still runs and gives Fulcrum's await-CI
+    # gate its green signal.
+    if: ${{ !(github.event.created && startsWith(github.ref, 'refs/heads/fulcrum/')) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
