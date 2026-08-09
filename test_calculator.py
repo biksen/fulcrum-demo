@@ -1,4 +1,4 @@
-from calculator import calculate_sum
+from calculator import add_values
 
-def test_calculate_sum():
-    assert calculate_sum(2, 3) == 5
+def test_add_values():
+    assert add_values(2, 3) == 5
